@@ -33,7 +33,34 @@ public class Sponge {
 
   // Implement your solution here!
   public static String spongeCase(String sentence) {
-    return null;
+    char[] sentenceArray = sentence.toCharArray();
+    String sponge = "";
+    boolean upper = false;
+
+    for(int i = 0; i < sentenceArray.length; i++)
+    {
+      if(Character.isLetter(sentenceArray[i])) 
+      {
+        if(upper)
+        {
+          sponge += Character.toUpperCase(sentenceArray[i]);
+        }
+        else
+        {
+          sponge += Character.toLowerCase(sentenceArray[i]);
+        }
+        upper = !upper;
+      }
+      else
+      {
+        sponge += sentenceArray[i];
+        if (Character.isWhitespace(sentenceArray[i])) 
+        {
+          upper = false;
+        }
+      }
+    }
+    return sponge;
   }
 
 
