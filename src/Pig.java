@@ -24,18 +24,47 @@ public class Pig {
         assertEqual(5, pigLatin("e"), "e");
     }
 
+    // Pseudocode area:
+    // check if first letter is a e i o u
+    // if true: skip and returns word
+    // if false: takes first letter, move letter back, deletes first letter, add "ay"
+
     // Implement your solution here!
     public static String pigLatin(String sentence) {
-        return null;
+        String pigString = "";
+        if(sentence.contains(" "))
+        {
+            String[] arr = sentence.split(" ");
+            for(String s : arr)
+            {
+                String wordPig = pigWord(s);
+                pigString += wordPig + " ";
+            }
+            pigString = pigString.substring(0, pigString.length() - 1);
+        }
+        else
+        {
+            String wordPig = pigWord(sentence);
+            pigString += wordPig;
+        }
+        return pigString;
     }
 
-
-
-
-
-
-
-
+    public static String pigWord(String word) {
+        char firstLetter = word.charAt(0);
+        if(firstLetter == 'a' || firstLetter == 'e' || firstLetter == 'i' || firstLetter == 'o' || firstLetter == 'u')
+        {
+            return word;
+        }
+        else
+        {
+            char[] pig = word.toCharArray();
+            char first = pig[0];
+            word = word.substring(1);
+            word += first + "ay";
+        }
+        return word;
+    }
 
     // Method to help with testing, you do not need to read this.
     public static void assertEqual(int testNumber, String actual, String expected) {
@@ -45,6 +74,4 @@ public class Pig {
         System.out.println("Test " + testNumber + " passed!");
         }
     }
-    }
-  
-  
+}  
